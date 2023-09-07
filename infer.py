@@ -1,4 +1,3 @@
-from model.mrc_model import MRCQuestionAnswering
 from transformers import AutoTokenizer, pipeline, RobertaForQuestionAnswering
 import torch
 from nltk import word_tokenize
@@ -96,28 +95,3 @@ def extract_answer(inputs, outputs, tokenizer):
         })
     return plain_result
 
-
-if __name__ == "__main__":
-    model_checkpoint = "nguyenvulebinh/vi-mrc-base"
-    tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
-    model = MRCQuestionAnswering.from_pretrained(model_checkpoint)
-
-    print(model)
-
-    QA_input = {
-        'question': "Bình được công nhận với danh hiệu gì ?",
-        'context': "Bình Nguyễn là một người đam mê với lĩnh vực xử lý ngôn ngữ tự nhiên . Anh nhận chứng chỉ Google Developer Expert năm 2020"
-    }
-    while True:
-        if len(QA_input['question'].strip()) > 0:
-            inputs = [tokenize_function(QA_input)]
-            inputs_ids = data_collator(inputs)
-            outputs = model(**inputs_ids)
-            answer = extract_answer(inputs, outputs, tokenizer)[0]
-            print("answer: {}. Score start: {}, Score end: {}".format(answer['answer'],
-                                                                      answer['score_start'],
-                                                                      answer['score_end']))
-
-        else:
-            QA_input['context'] = input('Context: ')
-        QA_input['question'] = input('Question: ')
