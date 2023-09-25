@@ -1,7 +1,4 @@
 from transformers.models.roberta.modeling_t5 import *
-_CHECKPOINT_FOR_DOC = "roberta-base"
-_CONFIG_FOR_DOC = "RobertaConfig"
-_TOKENIZER_FOR_DOC = "RobertaTokenizer"
 
 
 class MRCQuestionAnswering(T5PreTrainedModel):
