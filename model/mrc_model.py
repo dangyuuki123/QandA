@@ -14,7 +14,7 @@ class MRCQuestionAnswering(T5PreTrainedModel):
         super().__init__(config)
         self.num_labels = config.num_labels
 
-        self.roberta = T5Model(config, add_pooling_layer=False)
+        self.roberta = T5Model(config)
         self.qa_outputs = nn.Linear(config.hidden_size, config.num_labels)
 
         self.init_weights()
