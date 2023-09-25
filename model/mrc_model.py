@@ -1,4 +1,4 @@
-from transformers.models.roberta.modeling_t5 import *
+from transformers.models.t5.modeling_t5 import *
 
 
 class MRCQuestionAnswering(T5PreTrainedModel):
