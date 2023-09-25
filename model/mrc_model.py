@@ -1,11 +1,11 @@
-from transformers.models.roberta.modeling_roberta import *
+from transformers.models.roberta.modeling_t5 import *
 _CHECKPOINT_FOR_DOC = "roberta-base"
 _CONFIG_FOR_DOC = "RobertaConfig"
 _TOKENIZER_FOR_DOC = "RobertaTokenizer"
 
 
-class MRCQuestionAnswering(RobertaPreTrainedModel):
-    config_class = RobertaConfig
+class MRCQuestionAnswering(T5PreTrainedModel):
+    config_class = T5Config
 
     def _reorder_cache(self, past, beam_idx):
         pass
@@ -17,7 +17,7 @@ class MRCQuestionAnswering(RobertaPreTrainedModel):
         super().__init__(config)
         self.num_labels = config.num_labels
 
-        self.roberta = RobertaModel(config, add_pooling_layer=False)
+        self.roberta = T5Model(config, add_pooling_layer=False)
         self.qa_outputs = nn.Linear(config.hidden_size, config.num_labels)
 
         self.init_weights()
